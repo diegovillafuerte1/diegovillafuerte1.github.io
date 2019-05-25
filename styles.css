@@ -4,6 +4,10 @@ body {
 body p {
     font-size: 24px;
 }
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
 .subheader {
     font-size: 24px;
 }
