@@ -24,3 +24,6 @@ body p {
 .image-samples {
     width: 75%;
 }
+.image-samples img {
+    width: 100%;
+}
