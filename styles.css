@@ -1,10 +1,7 @@
 body {
-   font-family: "Courier New", Courier, monospace;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
 }
-body p {
-    font-size: 24px;
-    font-weight: bold;
-}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -14,16 +11,13 @@ body p {
 .text-container {
     width: 50%;
 }
+
 .subheader {
-    font-size: 24px;
-    color: #818181;
-    font-style: italic;
+    font-size: 12rem;
     font-weight: bold;
-    font-family: none;
 }
-.image-samples {
-    width: 75%;
-}
-.image-samples img {
-    width: 100%;
+
+.header {
+    font-size: 24rem;
+    font-weight: bold;
 }
