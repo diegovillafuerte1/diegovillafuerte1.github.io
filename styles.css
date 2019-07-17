@@ -8,16 +8,17 @@ body {
     align-items: center;
 }
 
-.text-container {
-    width: 50%;
+
+.header {
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 .subheader {
-    font-size: 12rem;
+    font-size: 1rem;
     font-weight: bold;
 }
 
-.header {
-    font-size: 24rem;
-    font-weight: bold;
+.text-container {
+    width: 50%;
 }
