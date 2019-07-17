@@ -6,6 +6,11 @@ hr {
     border-top: 1px solid black;
 }
 
+img {
+    width: 50%;
+    height: 50%;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
