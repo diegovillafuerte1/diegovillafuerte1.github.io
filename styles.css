@@ -2,6 +2,10 @@ body {
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
 }
 
+hr {
+    border-top: 1px dashed black;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -12,11 +16,13 @@ body {
 .header {
     font-size: 3rem;
     font-weight: bold;
+    padding-bottom: 10px;
 }
 
 .subheader {
     font-size: 1rem;
     font-weight: bold;
+    padding-bottom: 5px;
 }
 
 .text-container {
