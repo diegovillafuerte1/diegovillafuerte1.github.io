@@ -1,14 +1,18 @@
 body {
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+    display: flex;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 hr {
     border-top: 1px solid black;
+    width: 50%;
 }
 
 img {
-    width: 50%;
-    height: 50%;
+    align-self: center;
+    border: black;
+    border-radius: 8px;
+    width: 30%;
 }
 
 .main-container {
