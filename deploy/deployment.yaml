@@ -1,21 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: guestbook
-  labels:
-    app: guestbook
+  name: site-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: guestbook
+      app: static-site
   template:
     metadata:
       labels:
-        app: guestbook
+        app: static-site
     spec:
       containers:
-        - name: guestbook
+        - name: site
           image: diegovillafuertehcl/static-site:latest
           ports:
             - containerPort: 80
