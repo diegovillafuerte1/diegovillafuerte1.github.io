@@ -1,0 +1,34 @@
+pipeline:
+  name: guestbook-cd-pipeline
+  identifier: guestbookcdpipeline
+  projectIdentifier: YourProjectID
+  orgIdentifier: default
+  tags: {}
+
+  stages:
+    - stage:
+        name: Deploy Site
+        identifier: Deploy_Site
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Build Docker Image
+                  identifier: Build_Docker
+                  spec:
+                    shell: Bash
+                    command: |
+                      docker build -t diegovillafuertehcl/static-site:latest .
+                      docker push diegovillafuertehcl/static-site:latest
+              - step:
+                  type: Run
+                  name: Trigger GitOps Sync
+                  identifier: Trigger_Sync
+                  spec:
+                    shell: Bash
+                    command: |
+                      echo "Assuming GitOps sync will auto-trigger from image update or new commit"
+
