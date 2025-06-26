@@ -34,7 +34,7 @@ pipeline:
                     workingDir: <+codebase.repoRoot>
                     command: |
                       IMAGE_TAG="sha-<+pipeline.gitCommitId>"
-                      echo "IMAGE_TAG=$IMAGE_TAG" >> image_tag.env
+                      echo "IMAGE_TAG=$IMAGE_TAG" > image_tag.env
               - step:
                   name: Build and Push Docker Image
                   identifier: build_and_push_image
@@ -46,7 +46,7 @@ pipeline:
                       DOCKERHUB_USER: <+secrets.getValue("dockerhub_user")>
                       DOCKERHUB_PASS: <+secrets.getValue("dockerhub_pass")>
                     command: |
-                      IMAGE_TAG="sha-<+pipeline.gitCommitId>"
+                      source image_tag.env
                       echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
                       docker build -t diegovillafuertehcl/static-site:$IMAGE_TAG .
                       docker push diegovillafuertehcl/static-site:$IMAGE_TAG
