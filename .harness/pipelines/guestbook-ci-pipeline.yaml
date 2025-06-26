@@ -37,7 +37,7 @@ pipeline:
                     shell: Bash
                     command: |
                       cd $HARNESS_WORKSPACE
-                      IMAGE_TAG="sha-$(git rev-parse --short HEAD)"
+                      IMAGE_TAG="sha-<+codebase.shortCommitId>"
                       echo "IMAGE_TAG=$IMAGE_TAG" >> image_tag.env
               - step:
                   name: Build and Push Docker Image
