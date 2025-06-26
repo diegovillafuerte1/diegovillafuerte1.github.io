@@ -1,0 +1,16 @@
+inputSet:
+  name: master-branch-default
+  identifier: masterbranchdefault
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: guestbookcipipeline
+    properties:
+      ci:
+        codebase:
+          connectorRef: GitHubConnector1
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
+          repoName: <+input>
