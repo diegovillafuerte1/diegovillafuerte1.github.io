@@ -59,12 +59,21 @@ pipeline:
                     workingDir: <+codebase.repoRoot>
                     command: |
                       source image_tag.env
+                      echo "Using tag: $IMAGE_TAG"
+
                       git clone https://github.com/diegovillafuerte1/diegovillafuerte1.github.io-gitops release
                       cd release/apps/guestbook/base
-                      sed -i "s|image: .*|image: diegovillafuertehcl/static-site:$IMAGE_TAG|" deployment.yaml
+
+                      echo "Before sed:"
+                      cat deployment.yaml
+
+                      sed -i "s|^\s*image: .*|  image: diegovillafuertehcl/static-site:$IMAGE_TAG|" deployment.yaml
+
+                      echo "After sed:"
+                      cat deployment.yaml
 
                       git config --global user.name "ci-bot"
                       git config --global user.email "ci@diegovillafuerte.dev"
                       git add deployment.yaml
-                      git commit -m "chore: update image to $IMAGE_TAG"
+                      git commit -m "chore: update image to $IMAGE_TAG" || echo "No changes to commit"
                       git push origin main
