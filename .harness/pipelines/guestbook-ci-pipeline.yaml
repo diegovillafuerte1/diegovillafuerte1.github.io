@@ -36,7 +36,7 @@ pipeline:
                   spec:
                     shell: Bash
                     command: |
-                      cd /harness
+                      cd $HARNESS_WORKSPACE
                       IMAGE_TAG="sha-$(git rev-parse --short HEAD)"
                       echo "IMAGE_TAG=$IMAGE_TAG" >> image_tag.env
               - step:
@@ -49,7 +49,7 @@ pipeline:
                       DOCKERHUB_USER: <+secrets.getValue("dockerhub_user")>
                       DOCKERHUB_PASS: <+secrets.getValue("dockerhub_pass")>
                     command: |
-                      cd /harness
+                      cd $HARNESS_WORKSPACE
                       source image_tag.env
                       echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
                       docker build -t diegovillafuertehcl/static-site:$IMAGE_TAG .
@@ -61,8 +61,8 @@ pipeline:
                   spec:
                     shell: Bash
                     command: |
-                      source /harness/image_tag.env
-                      cd /harness
+                      source $HARNESS_WORKSPACE/image_tag.env
+                      cd $HARNESS_WORKSPACE
                       git clone https://github.com/diegovillafuerte1/diegovillafuerte1.github.io-gitops release
                       cd release/apps/guestbook/base
                       sed -i "s|image: .*|image: diegovillafuertehcl/static-site:$IMAGE_TAG|" deployment.yaml
