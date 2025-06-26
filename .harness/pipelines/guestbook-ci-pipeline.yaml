@@ -52,7 +52,7 @@ pipeline:
                       cd $HARNESS_WORKSPACE
                       source image_tag.env
                       echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
-                      docker build -t diegovillafuertehcl/static-site:$IMAGE_TAG $HARNESS_WORKSPACE
+                      docker build -t diegovillafuertehcl/static-site:$IMAGE_TAG .
                       docker push diegovillafuertehcl/static-site:$IMAGE_TAG
               - step:
                   name: Update GitOps Release Repo
