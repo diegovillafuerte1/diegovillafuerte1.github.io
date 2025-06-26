@@ -52,3 +52,21 @@ pipeline:
                       echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
                       docker build -t diegovillafuertehcl/static-site:$IMAGE_TAG .
                       docker push diegovillafuertehcl/static-site:$IMAGE_TAG
+              - step:
+                  name: Update GitOps Release Repo
+                  identifier: update_gitops
+                  type: Run
+                  spec:
+                    shell: Bash
+                    command: |
+                      source /harness/image_tag.env
+                      cd /harness
+                      git clone https://github.com/diegovillafuerte1/diegovillafuerte1.github.io-gitops release
+                      cd release/apps/guestbook/base
+                      sed -i "s|image: .*|image: diegovillafuertehcl/static-site:$IMAGE_TAG|" deployment.yaml
+
+                      git config --global user.name "ci-bot"
+                      git config --global user.email "ci@diegovillafuerte.dev"
+                      git add deployment.yaml
+                      git commit -m "chore: update image to $IMAGE_TAG"
+                      git push origin main
