@@ -22,11 +22,7 @@ pipeline:
             arch: Amd64
           runtime:
             type: Docker
-            spec:
-              image: ubuntu:22.04
-              shell: Bash
-            delegateSelectors:
-              - linux-amd64
+            spec: {}
           execution:
             steps:
               - step:
@@ -45,12 +41,12 @@ pipeline:
                   type: Run
                   spec:
                     shell: Bash
+                    workingDir: <+codebase.repoRoot>
                     envVariables:
                       DOCKERHUB_USER: <+secrets.getValue("dockerhub_user")>
                       DOCKERHUB_PASS: <+secrets.getValue("dockerhub_pass")>
                     command: |
-                      cd $HARNESS_WORKSPACE
-                      source image_tag.env
+                      IMAGE_TAG="sha-<+codebase.shortCommitId>"
                       echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
                       docker build -t diegovillafuertehcl/static-site:$IMAGE_TAG .
                       docker push diegovillafuertehcl/static-site:$IMAGE_TAG
