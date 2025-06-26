@@ -1,0 +1,39 @@
+pipeline:
+  name: guestbook-ci-pipeline
+  identifier: guestbookcipipeline
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: <+input>
+        repoName: diegovillafuerte1.github.io
+        build: <+input>
+  stages:
+    - stage:
+        name: Build and Push Image
+        identifier: build_and_push
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec:
+              image: ubuntu:22.04
+              shell: Bash
+          execution:
+            steps:
+              - step:
+                  name: Generate Image Tag
+                  identifier: gen_image_tag
+                  type: Run
+                  spec:
+                    shell: Bash
+                    command: |
+                      cd /harness
+                      IMAGE_TAG="sha-$(git rev-parse --short HEAD)"
+                      echo "IMAGE_TAG=$IMAGE_TAG" >> image_tag.env
