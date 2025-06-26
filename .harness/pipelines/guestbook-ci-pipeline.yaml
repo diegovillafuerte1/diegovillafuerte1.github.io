@@ -31,8 +31,8 @@ pipeline:
                   type: Run
                   spec:
                     shell: Bash
+                    workingDir: <+codebase.repoRoot>
                     command: |
-                      cd $HARNESS_WORKSPACE
                       IMAGE_TAG="sha-<+codebase.shortCommitId>"
                       echo "IMAGE_TAG=$IMAGE_TAG" >> image_tag.env
               - step:
@@ -56,9 +56,9 @@ pipeline:
                   type: Run
                   spec:
                     shell: Bash
+                    workingDir: <+codebase.repoRoot>
                     command: |
-                      source $HARNESS_WORKSPACE/image_tag.env
-                      cd $HARNESS_WORKSPACE
+                      source image_tag.env
                       git clone https://github.com/diegovillafuerte1/diegovillafuerte1.github.io-gitops release
                       cd release/apps/guestbook/base
                       sed -i "s|image: .*|image: diegovillafuertehcl/static-site:$IMAGE_TAG|" deployment.yaml
