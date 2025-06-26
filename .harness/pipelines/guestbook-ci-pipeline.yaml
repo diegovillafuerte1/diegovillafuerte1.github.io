@@ -25,6 +25,8 @@ pipeline:
             spec:
               image: ubuntu:22.04
               shell: Bash
+            delegateSelectors:
+              - linux-amd64
           execution:
             steps:
               - step:
