@@ -33,7 +33,7 @@ pipeline:
                     shell: Bash
                     workingDir: <+codebase.repoRoot>
                     command: |
-                      IMAGE_TAG="sha-<+pipeline.gitCommitId>"
+                      IMAGE_TAG="sha-<+pipeline.sequenceId>"
                       echo "IMAGE_TAG=$IMAGE_TAG" > image_tag.env
               - step:
                   name: Build and Push Docker Image
