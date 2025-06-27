@@ -64,7 +64,7 @@ pipeline:
                       git clone https://github.com/diegovillafuerte1/diegovillafuerte1.github.io-gitops release
                       cd release/apps/guestbook/base
 
-                      echo "Before sed: "
+                      echo "Before sed:"
                       cat deployment.yaml
 
                       sed -i "s|^\s*image: .*|  image: diegovillafuertehcl/static-site:$IMAGE_TAG|" deployment.yaml
